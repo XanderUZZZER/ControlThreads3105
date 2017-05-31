@@ -14,9 +14,9 @@ namespace ControlThreads3105
         private FileCreator file;
         public event FileObserver FileChanged;
 
-        public FileWatcher(FileInfo file)
+        public FileWatcher(FileCreator file)
         {
-            this.file.TextFileObject = file;
+            this.file= file;
         }
         private readonly object lockObject = new object();
         public void Start()
@@ -82,7 +82,7 @@ namespace ControlThreads3105
             Console.WriteLine("Threads control");
             
             FileCreator fileObject = new FileCreator();
-            FileWatcher fw = new FileWatcher(fileObject.TextFileObject);
+            FileWatcher fw = new FileWatcher(fileObject);
             fw.FileChanged += OnFileChanged;
             fw.Start();
 
